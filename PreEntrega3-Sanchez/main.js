@@ -19,19 +19,29 @@ let respuesta = document.getElementById("Busqueda");
 
 let boton = document.getElementById("boton");
 
-let resultadoBusqueda = document.getElementById("UltimasBusquedas");
+let ultimaBusqueda = document.getElementById("UltimasBusquedas");
+
+let resultadoBusqueda = document.getElementById("resultado");
+
+window.onload = function () {
+    let GuardadoLocal = localStorage.getItem("busquedaGuardada");
+    if (GuardadoLocal) {
+        UltimasBusquedas.innerHTML = GuardadoLocal;
+    }
+};
 
 respuesta.addEventListener("keydown",function(event) {
+    let valorinput = respuesta.value;
     if (event.key === "Enter") {
-        console.log(respuesta.value);
-        respuesta.value =""
+        resultadoBusqueda.innerHTML = valorinput;
+        localStorage.setItem("busquedaGuardada", valorinput);
+        respuesta.value ="";
     }
     });
 
 boton.addEventListener("click",function() {
         let valorinput = respuesta.value;
-        console.log(respuesta.value);
         resultadoBusqueda.innerHTML = valorinput;
+        localStorage.setItem("busquedaGuardada", valorinput);
         respuesta.value = "";
     });
-    
